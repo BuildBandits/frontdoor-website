@@ -1,0 +1,35 @@
+name: Agent change request
+description: Request a reviewable website change that the FrontDoor agent may implement.
+title: "[Agent] "
+labels:
+  - agent-ready
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The agent will create a pull request for review. It will never approve or merge its own work.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe what should be visibly or technically true after this change.
+      placeholder: "Example: Replace the hero subtitle with..."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable conditions that prove the issue is complete.
+      placeholder: |
+        - The desktop hero shows...
+        - The mobile layout remains...
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and references
+      description: Add exact copy, links, screenshots, assets, non-goals, or implementation constraints.
+    validations:
+      required: false
