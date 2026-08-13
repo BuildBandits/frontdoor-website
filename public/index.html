@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b0d0c">
+    <meta name="description" content="FrontDoor is the self-hosted, open-source launchpad for every internal app your team uses.">
+    <meta property="og:title" content="FrontDoor — One door. Every tool.">
+    <meta property="og:description" content="Give your team one secure, searchable place for every internal app.">
+    <meta property="og:type" content="website">
+    <title>FrontDoor — One door. Every tool.</title>
+    <link rel="icon" href="/assets/frontdoor-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="shell nav-wrap">
+        <a class="brand" href="#top" aria-label="FrontDoor home">
+          <span class="brand-mark"><img src="/assets/frontdoor-icon.svg" alt=""></span>
+          <span>FrontDoor</span>
+        </a>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button>
+          <span></span><span></span><span></span><span class="sr-only">Open menu</span>
+        </button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary" data-menu>
+          <a href="#why">Why FrontDoor</a>
+          <a href="#features">Features</a>
+          <a href="#deploy">Deploy</a>
+          <a href="#security">Security</a>
+          <a class="nav-cta" href="https://github.com/BuildBandits">GitHub <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-glow glow-one"></div>
+        <div class="hero-glow glow-two"></div>
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Open-source · Self-hosted</div>
+            <h1>One door.<br><span>Every tool.</span></h1>
+            <p class="hero-lede">Give your team one secure, searchable place for every internal app — with Microsoft sign-in and access that stays under your control.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#deploy">See how it works <span aria-hidden="true">→</span></a>
+              <a class="button button-ghost" href="#features">Explore features</a>
+            </div>
+            <div class="hero-proof" aria-label="Product highlights">
+              <span><i>✓</i> Microsoft Entra SSO</span>
+              <span><i>✓</i> Docker-ready</span>
+              <span><i>✓</i> Your data, your infrastructure</span>
+            </div>
+          </div>
+
+          <div class="product-stage reveal reveal-delay" aria-label="FrontDoor product preview">
+            <div class="stage-orbit orbit-one"></div>
+            <div class="stage-orbit orbit-two"></div>
+            <div class="app-window">
+              <div class="window-topbar">
+                <div class="window-brand"><img src="/assets/frontdoor-icon.svg" alt=""> FrontDoor</div>
+                <div class="window-nav"><b>Home</b><span>Apps</span><span>Groups</span><span>Users</span></div>
+                <div class="avatar">FL</div>
+              </div>
+              <div class="window-body">
+                <div class="mini-hero">
+                  <strong>Your apps,<br><em>all in one place.</em></strong>
+                  <small>Quickly access all the tools in your workspace.</small>
+                </div>
+                <div class="search-row"><span>⌕&nbsp;&nbsp; Search an application...</span><b>3 apps</b></div>
+                <div class="app-cards">
+                  <article><i class="card-icon violet">A</i><strong>Analytics</strong><small>Team metrics and insights</small></article>
+                  <article><i class="card-icon lime">D</i><strong>Documents</strong><small>Knowledge and resources</small></article>
+                  <article><i class="card-icon coral">S</i><strong>Support</strong><small>Requests and operations</small></article>
+                </div>
+              </div>
+            </div>
+            <div class="float-chip chip-sso"><span>✓</span> Signed in with Microsoft</div>
+            <div class="float-chip chip-access"><span>12</span> apps available</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="problem section" id="why">
+        <div class="shell">
+          <div class="section-kicker">The problem</div>
+          <div class="problem-grid">
+            <h2 class="reveal">Your intranet should not be a graveyard of links.</h2>
+            <div class="problem-copy reveal">
+              <p>Tools multiply. URLs change. Permissions drift. People lose time asking where things live — and IT keeps maintaining bookmarks nobody trusts.</p>
+              <p class="accent-copy">FrontDoor turns that sprawl into a launchpad people actually use.</p>
+            </div>
+          </div>
+          <div class="before-after reveal">
+            <div class="state state-before">
+              <span class="state-label">Before</span>
+              <ul><li>Scattered bookmarks</li><li>Repeated sign-ins</li><li>Stale access lists</li></ul>
+            </div>
+            <div class="state-arrow" aria-hidden="true">→</div>
+            <div class="state state-after">
+              <span class="state-label">With FrontDoor</span>
+              <ul><li>One searchable catalog</li><li>One Microsoft identity</li><li>Access by team and role</li></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="features section" id="features">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <div><div class="section-kicker">What you get</div><h2>Simple for people.<br>Powerful for IT.</h2></div>
+            <p>A focused experience for the whole organization, backed by the controls administrators need.</p>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card feature-large reveal">
+              <div class="feature-icon">⌕</div><div class="feature-num">01</div>
+              <h3>A catalog that stays useful</h3>
+              <p>Search, tags, favorites, card and compact views. Every user sees the apps they can actually access — nothing else.</p>
+              <div class="catalog-demo"><span>Search applications</span><i>⌕</i><div><b>★</b> Favorites <b>⌘</b> Group by tag</div></div>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">◎</div><div class="feature-num">02</div>
+              <h3>Microsoft sign-in</h3>
+              <p>Authenticate through Microsoft Entra ID and provision people automatically on first login.</p>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">⌘</div><div class="feature-num">03</div>
+              <h3>Access by group</h3>
+              <p>Map apps to local or Entra groups, including inherited group membership.</p>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">↗</div><div class="feature-num">04</div>
+              <h3>Connect any app</h3>
+              <p>Launch plain links, forward signed SSO tokens, share a secure cookie, or open native Entra apps.</p>
+            </article>
+            <article class="feature-card reveal">
+              <div class="feature-icon">◫</div><div class="feature-num">05</div>
+              <h3>Admin without config files</h3>
+              <p>Manage apps, people, groups, branding, logs and backups from one clean interface.</p>
+            </article>
+            <article class="feature-card feature-wide reveal">
+              <div><div class="feature-icon">◉</div><div class="feature-num">06</div><h3>Built to be yours</h3><p>Customize the experience, choose what to log, export a complete backup, and keep the service on infrastructure you control.</p></div>
+              <div class="ownership-list"><span><i>✓</i> Custom branding</span><span><i>✓</i> Configurable retention</span><span><i>✓</i> Portable backups</span><span><i>✓</i> English & Italian UI</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="workflow section" id="deploy">
+        <div class="shell">
+          <div class="section-heading reveal">
+            <div><div class="section-kicker">From zero to useful</div><h2>Deploy once.<br>Open every day.</h2></div>
+            <p>FrontDoor is designed to fit an existing stack instead of forcing a new one.</p>
+          </div>
+          <ol class="steps">
+            <li class="reveal"><span>01</span><div><h3>Run the container</h3><p>Deploy the Docker image on your server or cloud platform with persistent storage.</p></div></li>
+            <li class="reveal"><span>02</span><div><h3>Connect Microsoft</h3><p>Add your Entra application credentials and choose the owners of the workspace.</p></div></li>
+            <li class="reveal"><span>03</span><div><h3>Add your apps</h3><p>Import or create apps, assign groups, and pick the connection mode that fits each tool.</p></div></li>
+            <li class="reveal"><span>04</span><div><h3>Share one URL</h3><p>Your team signs in and gets a personal, permission-aware app catalog.</p></div></li>
+          </ol>
+          <div class="terminal reveal" aria-label="Docker deployment example">
+            <div class="terminal-bar"><span></span><span></span><span></span><b>frontdoor — deploy</b></div>
+            <pre><code><em>$</em> docker compose up -d
+
+<span>✓</span> frontdoor  Started
+<span>✓</span> database   Ready
+<span>✓</span> gateway    Listening on :3001</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="security section" id="security">
+        <div class="shell security-grid">
+          <div class="security-copy reveal">
+            <div class="section-kicker">Security by design</div>
+            <h2>Your front door should be a strong one.</h2>
+            <p>FrontDoor keeps identity at Microsoft, sessions away from browser scripts, and authorization close to the apps it protects.</p>
+          </div>
+          <div class="security-points">
+            <article class="reveal"><span>01</span><div><h3>Secure sessions</h3><p>Signed JWTs are stored in httpOnly cookies, never exposed to frontend JavaScript.</p></div></article>
+            <article class="reveal"><span>02</span><div><h3>Traceable changes</h3><p>Privileged actions have a dedicated audit trail with configurable retention.</p></div></article>
+            <article class="reveal"><span>03</span><div><h3>Defensive defaults</h3><p>Parameterized queries, sanitized SVG content, CSRF state validation and rate limits are built in.</p></div></article>
+            <article class="reveal"><span>04</span><div><h3>Self-hosted control</h3><p>Your catalog, database and operational data stay in the environment you choose.</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section section">
+        <div class="shell">
+          <div class="cta-panel reveal">
+            <div class="cta-door" aria-hidden="true"><img src="/assets/frontdoor-icon.svg" alt=""></div>
+            <div class="section-kicker">Coming soon</div>
+            <h2>Less hunting.<br>More opening.</h2>
+            <p>The public open-source release is in preparation. Follow BuildBandits on GitHub to see FrontDoor as it opens up.</p>
+            <a class="button button-primary" href="https://github.com/BuildBandits">Follow the project <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <a class="brand" href="#top"><span class="brand-mark"><img src="/assets/frontdoor-icon.svg" alt=""></span><span>FrontDoor</span></a>
+        <p>Your apps, all in one place.</p>
+        <div class="footer-links"><a href="#features">Features</a><a href="#security">Security</a><a href="https://github.com/BuildBandits">GitHub ↗</a></div>
+        <small>© <span data-year></span> BuildBandits. FrontDoor is preparing for open-source release.</small>
+      </div>
+    </footer>
+  </body>
+</html>
