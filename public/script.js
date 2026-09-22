@@ -83,7 +83,7 @@ if (video) {
       demoLanguage = language;
       video.querySelector('source').src = `${mediaRoot}/${language}/frontdoor-demo.mp4`;
       video.poster = `${mediaRoot}/${language}/02-governed-catalog.webp`;
-      video.setAttribute('aria-label', `FrontDoor product demo — ${demoLanguages[language].name}`);
+      video.setAttribute('aria-label', `Frontdoor product demo — ${demoLanguages[language].name}`);
       // Replace the track, rather than retaining stale cues from the other language.
       const previousTrack = video.querySelector('track');
       const captionsEnabled = previousTrack.track.mode === 'showing';
@@ -103,7 +103,7 @@ if (video) {
         item.querySelector('time').textContent = timestamp(demoLanguages[language].chapters[item.dataset.chapter]);
       });
       const transcript = document.querySelector('[data-transcript]');
-      transcript.href = `${mediaRoot}/${language}/transcript.html`;
+      transcript.href = `${mediaRoot}/${language}/transcript.html?v=2`;
       transcript.textContent = language === 'it' ? 'Leggi la trascrizione ↗' : 'Read the transcript ↗';
       transcript.lang = language;
       demoStatus.textContent = `${demoLanguages[language].name} selected. Press Play to start from the beginning.`;

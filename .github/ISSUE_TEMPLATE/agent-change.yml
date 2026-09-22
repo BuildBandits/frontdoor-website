@@ -1,5 +1,5 @@
 name: Agent change request
-description: Request a reviewable website change that the FrontDoor agent may implement.
+description: Request a reviewable website change that the Frontdoor agent may implement.
 title: "[Agent] "
 labels:
   - agent-ready
