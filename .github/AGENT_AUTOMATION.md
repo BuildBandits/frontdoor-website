@@ -1,6 +1,6 @@
 # Issue-to-PR automation contract
 
-The FrontDoor website agent checks GitHub issues every 30 minutes and may work only on open issues carrying the `agent-ready` label.
+The Frontdoor website agent checks GitHub issues every 30 minutes and may work only on open issues carrying the `agent-ready` label.
 
 ## Success criteria
 
@@ -8,7 +8,7 @@ The FrontDoor website agent checks GitHub issues every 30 minutes and may work o
 - An issue with an existing open pull request is never implemented twice.
 - Every change is isolated on `agent/issue-<number>-<slug>` and submitted as a pull request with `Closes #<number>`.
 - The agent runs static checks and `npm run deploy -- --dry-run` before opening a pull request.
-- Every run reports its outcome to the FrontDoor website Discord thread, including no-op and blocked runs.
+- Every run reports its outcome to the Frontdoor website Discord thread, including no-op and blocked runs.
 - Merging a reviewed pull request into `main` triggers the Cloudflare production deployment.
 
 ## Allowed scope

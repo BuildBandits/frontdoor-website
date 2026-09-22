@@ -45,7 +45,7 @@ test('all local resources, fragments and accessible control targets exist', () =
   for (const element of d.querySelectorAll('[src], [href], [poster], [aria-controls]')) {
     for (const attr of ['src', 'href', 'poster']) {
       const url = element.getAttribute(attr);
-      if (url?.startsWith('/')) assert.ok(fs.existsSync(path.join(publicDir, url)), url);
+      if (url?.startsWith('/')) assert.ok(fs.existsSync(path.join(publicDir, new URL(url, "https://example.test").pathname)), url);
       if (url?.startsWith('#')) assert.ok(d.getElementById(url.slice(1)), url);
     }
     if (element.hasAttribute('aria-controls')) assert.ok(d.getElementById(element.getAttribute('aria-controls')));
@@ -78,7 +78,7 @@ test('audio switching resets without autoplay and replaces captions and transcri
   assert.equal(s.calls.play, 0);
   assert.ok(s.video.querySelector('source').src.endsWith('/it/frontdoor-demo.mp4'));
   assert.ok(s.video.poster.endsWith('/it/02-governed-catalog.webp'));
-  assert.ok(s.document.querySelector('[data-transcript]').href.endsWith('/it/transcript.html'));
+  assert.ok(s.document.querySelector('[data-transcript]').href.endsWith('/it/transcript.html?v=2'));
   const next = s.video.querySelector('track');
   assert.notEqual(previous, next);
   assert.equal(next.srclang, 'it');

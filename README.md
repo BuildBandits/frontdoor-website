@@ -1,6 +1,6 @@
-# FrontDoor website
+# Frontdoor website
 
-Static product website for FrontDoor, deployed on Cloudflare Workers with Static Assets.
+Static product website for Frontdoor, deployed on Cloudflare Workers with Static Assets.
 
 ## Local development
 

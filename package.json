@@ -2,7 +2,7 @@
   "name": "frontdoor-website",
   "version": "0.1.1",
   "private": true,
-  "description": "Product website for FrontDoor",
+  "description": "Product website for Frontdoor",
   "scripts": {
     "test": "node --test tests/*.test.cjs",
     "dev": "wrangler dev",
