@@ -8,6 +8,8 @@
     <meta property="og:title" content="FrontDoor — One door. Every tool.">
     <meta property="og:description" content="Give your team one secure, searchable place for every internal app.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://frontdoor-website.fluffy-eyelash.workers.dev/assets/tour-v1/social-preview.jpg">
+    <meta property="og:image:alt" content="The FrontDoor application catalog in a real demo workspace">
     <title>FrontDoor — One door. Every tool.</title>
     <link rel="icon" href="/assets/frontdoor-icon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/styles.css">
@@ -26,8 +28,9 @@
           <span></span><span></span><span></span><span class="sr-only">Open menu</span>
         </button>
         <nav class="site-nav" id="site-nav" aria-label="Primary" data-menu>
-          <a href="#why">Why FrontDoor</a>
+          <a href="#demo">Watch the demo</a>
           <a href="#features">Features</a>
+          <a href="#tour">Inside FrontDoor</a>
           <a href="#deploy">Deploy</a>
           <a href="#security">Security</a>
           <a class="nav-cta" href="https://github.com/BuildBandits">GitHub <span aria-hidden="true">↗</span></a>
@@ -45,7 +48,7 @@
             <h1>One door.<br><span>Every tool.</span></h1>
             <p class="hero-lede">Give your team one secure, searchable place for every internal app — with Microsoft sign-in and access that stays under your control.</p>
             <div class="hero-actions">
-              <a class="button button-primary" href="#deploy">See how it works <span aria-hidden="true">→</span></a>
+              <a class="button button-primary" href="#demo"><span aria-hidden="true">▶</span> Watch it in action <span class="button-duration">2:48</span></a>
               <a class="button button-ghost" href="#features">Explore features</a>
             </div>
             <div class="hero-proof" aria-label="Product highlights">
@@ -55,31 +58,50 @@
             </div>
           </div>
 
-          <div class="product-stage reveal reveal-delay" aria-label="FrontDoor product preview">
+          <div class="product-stage real-product-stage reveal reveal-delay" aria-label="FrontDoor product preview">
             <div class="stage-orbit orbit-one"></div>
             <div class="stage-orbit orbit-two"></div>
-            <div class="app-window">
-              <div class="window-topbar">
-                <div class="window-brand"><img src="/assets/frontdoor-icon.svg" alt=""> FrontDoor</div>
-                <div class="window-nav"><b>Home</b><span>Apps</span><span>Groups</span><span>Users</span></div>
-                <div class="avatar">FL</div>
-              </div>
-              <div class="window-body">
-                <div class="mini-hero">
-                  <strong>Your apps,<br><em>all in one place.</em></strong>
-                  <small>Quickly access all the tools in your workspace.</small>
-                </div>
-                <div class="search-row"><span>⌕&nbsp;&nbsp; Search an application...</span><b>3 apps</b></div>
-                <div class="app-cards">
-                  <article><i class="card-icon violet">A</i><strong>Analytics</strong><small>Team metrics and insights</small></article>
-                  <article><i class="card-icon lime">D</i><strong>Documents</strong><small>Knowledge and resources</small></article>
-                  <article><i class="card-icon coral">S</i><strong>Support</strong><small>Requests and operations</small></article>
-                </div>
+            <a class="app-window real-product-preview" href="#demo" aria-label="Watch the FrontDoor product demo">
+              <img src="/assets/tour-v1/en/02-governed-catalog.webp" alt="FrontDoor running in the Meridian Works demo workspace, with a searchable catalog of business applications" width="1920" height="1080" fetchpriority="high">
+              <span class="preview-play"><span aria-hidden="true">▶</span> Take a look inside</span>
+            </a>
+            <div class="float-chip chip-sso"><span>✓</span> Real product. Demo workspace.</div>
+            <div class="float-chip chip-access"><span>16</span> apps. One starting point.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="demo-section section" id="demo" aria-labelledby="demo-heading">
+        <div class="shell">
+          <div class="section-heading">
+            <div><div class="section-kicker">The three-minute tour</div><h2 id="demo-heading">Meet your team's<br><span class="lime-text">new starting point.</span></h2></div>
+            <p>From finding the right app to keeping access under control. See the real product, in English or Italian.</p>
+          </div>
+          <div class="demo-cinema">
+            <div class="cinema-bar">
+              <span class="cinema-label"><span class="status-dot" aria-hidden="true"></span> FRONTDOOR / IN ACTION</span>
+              <div class="language-switch" role="group" aria-label="Demo audio language" data-demo-controls hidden>
+                <button type="button" data-language="en" aria-pressed="true" aria-controls="product-video">English <span>2:48</span></button>
+                <button type="button" data-language="it" aria-pressed="false" aria-controls="product-video" lang="it">Italiano <span>2:51</span></button>
               </div>
             </div>
-            <div class="float-chip chip-sso"><span>✓</span> Signed in with Microsoft</div>
-            <div class="float-chip chip-access"><span>12</span> apps available</div>
+            <video id="product-video" controls playsinline preload="none" width="1280" height="720" poster="/assets/tour-v1/en/02-governed-catalog.webp" aria-label="FrontDoor product demo in English" aria-describedby="demo-note">
+              <source src="/assets/tour-v1/en/frontdoor-demo.mp4" type="video/mp4">
+              <track kind="captions" src="/assets/tour-v1/en/captions.vtt" srclang="en" label="English">
+              Your browser does not support this video. <a href="/assets/tour-v1/en/frontdoor-demo.mp4">Open the English demo</a>.
+            </video>
+            <div class="demo-chapters" role="group" aria-label="Jump to a video chapter" data-demo-controls hidden>
+              <button type="button" data-chapter="catalog"><span>01 / DISCOVER</span>Find your next tool <time>0:17</time></button>
+              <button type="button" data-chapter="admin"><span>02 / MANAGE</span>Make IT simpler <time>0:50</time></button>
+              <button type="button" data-chapter="access"><span>03 / CONTROL</span>Give the right access <time>1:09</time></button>
+              <button type="button" data-chapter="connect"><span>04 / CONNECT</span>Open every possibility <time>1:44</time></button>
+            </div>
           </div>
+          <div class="demo-footnote">
+            <p id="demo-note">Real software, fictional workspace. Public release in preparation; the repository shown in the video is not yet public.</p>
+            <p><a data-transcript href="/assets/tour-v1/en/transcript.html">Read the transcript ↗</a><span aria-hidden="true"> · </span><a href="/assets/tour-v1/en/frontdoor-demo.mp4">EN video ↗</a><span aria-hidden="true"> · </span><a href="/assets/tour-v1/it/frontdoor-demo.mp4" lang="it">Video IT ↗</a></p>
+          </div>
+          <p class="sr-only" role="status" data-demo-status></p>
         </div>
       </section>
 
@@ -148,6 +170,36 @@
         </div>
       </section>
 
+      <section class="product-tour section" id="tour" aria-labelledby="tour-heading">
+        <div class="shell">
+          <div class="section-heading">
+            <div><div class="section-kicker">A closer look</div><h2 id="tour-heading">One door.<br>Look at what opens.</h2></div>
+            <p>Less searching for people.<br>More clarity for IT.<br>Explore six moments from the product.</p>
+          </div>
+          <div class="tour-layout">
+            <div class="tour-navigation" role="group" aria-label="Explore product screenshots" data-tour-controls hidden>
+              <button type="button" data-screen="catalog" aria-pressed="true" aria-controls="screen-catalog"><span>01</span><span>Your daily launchpad<small>Every app in its place</small></span><b aria-hidden="true">↗</b></button>
+              <button type="button" data-screen="search" aria-pressed="false" aria-controls="screen-search"><span>02</span><span>Find it. Open it.<small>Search without the guesswork</small></span><b aria-hidden="true">↗</b></button>
+              <button type="button" data-screen="admin" aria-pressed="false" aria-controls="screen-admin"><span>03</span><span>Behind the simplicity<small>One console for your apps</small></span><b aria-hidden="true">↗</b></button>
+              <button type="button" data-screen="access" aria-pressed="false" aria-controls="screen-access"><span>04</span><span>A door for everyone<small>A catalog relevant to each role</small></span><b aria-hidden="true">↗</b></button>
+              <button type="button" data-screen="connect" aria-pressed="false" aria-controls="screen-connect"><span>05</span><span>Different apps. One home.<small>Choose how each tool connects</small></span><b aria-hidden="true">↗</b></button>
+              <button type="button" data-screen="audit" aria-pressed="false" aria-controls="screen-audit"><span>06</span><span>Know what changed<small>Keep a trace of admin actions</small></span><b aria-hidden="true">↗</b></button>
+            </div>
+            <div class="tour-stage">
+              <div class="tour-stage-bar"><span>INSIDE / FRONTDOOR</span><div role="group" aria-label="Screenshot language" class="language-switch" data-tour-controls hidden><button type="button" data-image-language="en" aria-pressed="true">EN</button><button type="button" data-image-language="it" aria-pressed="false">IT</button></div></div>
+              <figure id="screen-catalog" data-tour-panel="catalog"><a href="/assets/tour-v1/en/02-governed-catalog.webp" data-full-image><img src="/assets/tour-v1/en/02-governed-catalog.webp" data-asset="02-governed-catalog" width="1920" height="1080" loading="lazy" decoding="async" alt="The FrontDoor demo catalog, showing tagged business applications and favorites"></a><figcaption><span class="screen-number">01 / 06</span><h3>The whole workspace. Minus the noise.</h3><p>One searchable home for the tools your team uses. Tags, favorites and clear descriptions turn a list of links into a useful starting point.</p><a href="/assets/tour-v1/en/02-governed-catalog.webp" data-full-image>View full-size image ↗</a></figcaption></figure>
+              <figure id="screen-search" data-tour-panel="search"><a href="/assets/tour-v1/en/03-search.webp" data-full-image><img src="/assets/tour-v1/en/03-search.webp" data-asset="03-search" width="1920" height="1080" loading="lazy" decoding="async" alt="The catalog filtered by a search for security applications"></a><figcaption><span class="screen-number">02 / 06</span><h3>Find the tool. Not the person who has the link.</h3><p>Search narrows the catalog instantly. No need to memorize a product name or ask where the latest URL lives.</p><a href="/assets/tour-v1/en/03-search.webp" data-full-image>View full-size image ↗</a></figcaption></figure>
+              <figure id="screen-admin" data-tour-panel="admin"><a href="/assets/tour-v1/en/05-admin-apps.webp" data-full-image><img src="/assets/tour-v1/en/05-admin-apps.webp" data-asset="05-admin-apps" width="1920" height="1080" loading="lazy" decoding="async" alt="The administration console listing applications, status and access modes"></a><figcaption><span class="screen-number">03 / 06</span><h3>Keep the catalog useful. Keep IT in control.</h3><p>Manage applications, visibility and destinations in one place. An explicit configuration replaces scattered bookmarks and stale spreadsheets.</p><a href="/assets/tour-v1/en/05-admin-apps.webp" data-full-image>View full-size image ↗</a></figcaption></figure>
+              <figure id="screen-access" data-tour-panel="access"><a href="/assets/tour-v1/en/08-role-aware-catalog.webp" data-full-image><img src="/assets/tour-v1/en/08-role-aware-catalog.webp" data-asset="08-role-aware-catalog" width="1920" height="1080" loading="lazy" decoding="async" alt="Comparison of an IT owner with sixteen applications and a user with seven assigned applications"></a><figcaption><span class="screen-number">04 / 06</span><h3>Same door. Different possibilities.</h3><p>In our demo, the IT owner sees sixteen apps; a team member sees seven. Group assignments make the catalog relevant to the person signing in.</p><a href="/assets/tour-v1/en/08-role-aware-catalog.webp" data-full-image>View full-size image ↗</a></figcaption></figure>
+              <figure id="screen-connect" data-tour-panel="connect"><a href="/assets/tour-v1/en/09-integration-modes.webp" data-full-image><img src="/assets/tour-v1/en/09-integration-modes.webp" data-asset="09-integration-modes" width="1920" height="1080" loading="lazy" decoding="async" alt="Diagram showing FrontDoor integration options including direct links, SSO, shared sessions and Microsoft Entra"></a><figcaption><span class="screen-number">05 / 06</span><h3>Your stack doesn't need to start over.</h3><p>Direct links, signed SSO, shared sessions or Microsoft Entra: pick the connection that fits each application.</p><a href="/assets/tour-v1/en/09-integration-modes.webp" data-full-image>View full-size image ↗</a></figcaption></figure>
+              <figure id="screen-audit" data-tour-panel="audit"><a href="/assets/tour-v1/en/12-audit.webp" data-full-image><img src="/assets/tour-v1/en/12-audit.webp" data-asset="12-audit" width="1920" height="1080" loading="lazy" decoding="async" alt="The FrontDoor audit trail recording administrative changes and their context"></a><figcaption><span class="screen-number">06 / 06</span><h3>Changes leave a trail.</h3><p>See how the configuration evolves, with a dedicated audit view for administrative actions. Visibility doesn't stop at the sign-in screen.</p><a href="/assets/tour-v1/en/12-audit.webp" data-full-image>View full-size image ↗</a></figcaption></figure>
+            </div>
+          </div>
+          <p class="tour-note">Captured in our demo workspace · Select an image to see it in full detail.</p>
+          <p class="sr-only" role="status" data-tour-status></p>
+        </div>
+      </section>
+
       <section class="workflow section" id="deploy">
         <div class="shell">
           <div class="section-heading reveal">
@@ -204,7 +256,7 @@
       <div class="shell footer-grid">
         <a class="brand" href="#top"><span class="brand-mark"><img src="/assets/frontdoor-icon.svg" alt=""></span><span>FrontDoor</span></a>
         <p>Your apps, all in one place.</p>
-        <div class="footer-links"><a href="#features">Features</a><a href="#security">Security</a><a href="https://github.com/BuildBandits">GitHub ↗</a></div>
+        <div class="footer-links"><a href="#demo">Watch the demo</a><a href="#tour">Product tour</a><a href="#features">Features</a><a href="#security">Security</a><a href="https://github.com/BuildBandits">GitHub ↗</a></div>
         <small>© <span data-year></span> BuildBandits. FrontDoor is preparing for open-source release.</small>
       </div>
     </footer>
