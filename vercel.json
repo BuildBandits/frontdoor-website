@@ -23,7 +23,7 @@
       ]
     },
     {
-      "source": "/assets/tour-v1/:language/captions.vtt",
+      "source": "/assets/:version/:language/captions.vtt",
       "headers": [
         { "key": "Content-Type", "value": "text/vtt; charset=utf-8" }
       ]
