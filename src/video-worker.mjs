@@ -1,5 +1,5 @@
-// Only the two demo MP4 routes run this Worker. Everything else stays static.
-const VIDEO_PATH = /^\/assets\/tour-v1\/(en|it)\/frontdoor-demo\.mp4$/;
+// Current demos and immutable v1 fallback routes only. Everything else stays static.
+const VIDEO_PATH = /^\/assets\/(tour-v1|demo-v2)\/(en|it)\/frontdoor-demo\.mp4$/;
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',

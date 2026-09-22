@@ -7,7 +7,9 @@
     "binding": "ASSETS",
     "run_worker_first": [
       "/assets/tour-v1/en/frontdoor-demo.mp4",
-      "/assets/tour-v1/it/frontdoor-demo.mp4"
+      "/assets/tour-v1/it/frontdoor-demo.mp4",
+      "/assets/demo-v2/en/frontdoor-demo.mp4",
+      "/assets/demo-v2/it/frontdoor-demo.mp4"
     ],
     "directory": "./public",
     "not_found_handling": "single-page-application"

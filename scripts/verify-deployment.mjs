@@ -67,7 +67,7 @@ async function verifyFiles(directory, prefix = '') {
 
 const count = await verifyFiles(publicDir);
 for (const lang of ['en', 'it']) {
-  const path = `/assets/tour-v1/${lang}/frontdoor-demo.mp4`;
+  const path = `/assets/demo-v2/${lang}/frontdoor-demo.mp4`;
   const local = await readFile(join(publicDir, path));
   const head = await request(path, { method: 'HEAD' });
   assert.equal(head.status, 200);
