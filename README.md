@@ -41,6 +41,10 @@ plus six screenshot views in both languages. Assets come from the approved
   all six screenshot panels, and visible page content.
 - All media is same-origin. No external player, cookies, new service or CSP
   relaxation was added.
+- `src/video-worker.mjs` handles only the two MP4 paths: single-byte-range GETs
+  return 206 for native seeking, HEAD returns metadata, and invalid ranges return
+  416. All other files bypass Worker execution. Security headers are explicitly
+  preserved on Worker responses; no external storage or runtime dependency.
 - The product repository was still private on 2026-09-22. Keep the pre-release
   notice beside the video until the public release is confirmed. This change
   does not alter repository visibility or the separate GitHub-link PR.
@@ -49,6 +53,6 @@ Manual visual review: hero; `#demo` playback, EN/IT switching and chapter seekin
 `#tour` six views and EN/IT images; desktop, 390px/320px mobile, keyboard focus,
 reduced motion and no-JavaScript fallback.
 
-Run `npm test` for DOM interaction, resource/fallback and media metadata checks.
+Run `npm test` for DOM interaction, resource/fallback, media limits and HTTP range checks.
 These tests simulate browser media events; they do not replace real playback or
 visual verification in a browser.
