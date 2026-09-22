@@ -1,15 +1,15 @@
 # Issue-to-PR automation contract
 
-The Frontdoor website agent checks GitHub issues every 30 minutes and may work only on open issues carrying the `agent-ready` label.
+The Frontdoor website agent checks GitHub issues daily at 09:00 Europe/Rome and may work only on open issues carrying the `agent-ready` label.
 
 ## Success criteria
 
 - At most one issue is implemented per run.
 - An issue with an existing open pull request is never implemented twice.
 - Every change is isolated on `agent/issue-<number>-<slug>` and submitted as a pull request with `Closes #<number>`.
-- The agent runs static checks and `npm run deploy -- --dry-run` before opening a pull request.
+- The agent runs static checks, `npm run build`, and (while Cloudflare remains active) `npm run deploy -- --dry-run` before opening a pull request.
 - Every run reports its outcome to the Frontdoor website Discord thread, including no-op and blocked runs.
-- Merging a reviewed pull request into `main` triggers the Cloudflare production deployment.
+- Merging a reviewed pull request into `main` triggers the configured production deployments. Cloudflare remains active during the Vercel transition; do not assume the Vercel Git integration is live until verified.
 
 ## Allowed scope
 
@@ -34,10 +34,17 @@ npm install
 git diff --check
 node --check public/script.js
 xmllint --noout public/assets/frontdoor-icon.svg
+npm run build
 npm run deploy -- --dry-run
 ```
 
 For visual changes, the pull request must explain what changed and identify the affected viewport or component for human review.
+
+For hosting/media-delivery changes, verify a real preview with
+`npm run verify:deployment -- https://ACTUAL-DEPLOYMENT-URL` before a human performs
+the cutover. A local build alone does not verify Vercel's media delivery. The
+issue-to-PR agent must not modify domains, billing, repository visibility, or
+provider integrations as part of an ordinary issue run.
 
 ## Blocked stop condition
 

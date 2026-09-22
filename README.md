@@ -1,6 +1,7 @@
 # Frontdoor website
 
-Static product website for Frontdoor, deployed on Cloudflare Workers with Static Assets.
+Static product website for Frontdoor. Vercel migration is prepared; the existing
+Cloudflare Workers deployment remains available during the transition.
 
 ## Local development
 
@@ -9,9 +10,57 @@ npm install
 npm run dev
 ```
 
-## Deployment
+## Vercel deployment
 
-The production Worker is connected to the `main` branch through Cloudflare Workers Builds. Every push to `main` triggers a deployment. Until a custom domain is purchased, the site is served from its `*.workers.dev` address.
+Import `BuildBandits/frontdoor-website` into the authorized Vercel Hobby account
+after the website repository is public. This is the free, non-commercial
+open-source project; do not activate Pro or a paid trial for this migration.
+
+`vercel.json` supplies all build settings: **Other** framework, `npm ci --include=dev`,
+`npm run build`, and output directory `dist`. The build runs the complete test suite
+before copying the static website. No Next.js application, Functions, database,
+environment secrets, or external media service are required. Only public website
+files are deployed; Cloudflare's `_headers` is excluded and its policies are
+expressed in `vercel.json`. Missing paths are not rewritten to the homepage.
+
+Connect Vercel's GitHub app only to this repository and select `main` as the
+production branch. Branch/PR deployments provide previews. Check the actual Git
+integration with a preview before considering automatic deployments operational.
+
+Before moving the domain, run against the deployed revision:
+
+```bash
+npm ci
+npm run build
+npm run verify:deployment -- https://THE-ACTUAL-VERCEL-DEPLOYMENT
+```
+
+The last command validates deployed content, security/cache headers, subtitle MIME
+types, both MP4s, HEAD metadata, six exact byte ranges, and versioned transcripts.
+If a preview requires authentication, verify through the authorized session; do
+not disable protection globally or commit bypass credentials. HTTP checks do not
+replace the visual/playback review described below.
+
+### Domain and cutover
+
+The intended domain is `frontdoor.buildbandits.com`. Keep the authoritative DNS
+and registrar on Spaceship. Add this subdomain to the Vercel project, then use the
+**exact CNAME destination returned for that project**, with host `frontdoor`.
+Add a TXT record only if Vercel explicitly returns an ownership challenge. Do not
+change nameservers, apex records, mail records, or unrelated subdomains.
+
+Wait for DNS verification and the HTTPS certificate, repeat the deployment checks
+on the custom domain, and then update the canonical URL, Open Graph URL/image,
+GitHub homepage, and deployment documentation. Keep Cloudflare available until
+the custom domain and real EN/IT playback/chapter seeking are verified.
+
+### Cloudflare fallback (still active until cutover)
+
+The Worker is connected to `main` through Cloudflare Workers Builds. Every push
+to `main` triggers a deployment at
+`https://frontdoor-website.fluffy-eyelash.workers.dev/`. `npm run dev` and
+`npm run deploy -- --dry-run` remain available during the transition. Do not remove
+this fallback or change its domain configuration before the Vercel cutover.
 
 ## Structure
 
@@ -20,6 +69,9 @@ The production Worker is connected to the `main` branch through Cloudflare Worke
 - `public/script.js` — navigation and progressive enhancement
 - `public/assets/` — brand and product assets
 - `wrangler.jsonc` — Cloudflare Static Assets configuration
+- `vercel.json` — Vercel static deployment and security/cache headers
+- `scripts/build.mjs` — publish only website files to ignored `dist/`
+- `scripts/verify-deployment.mjs` — HTTP verification for preview and production
 
 ## Bilingual product tour
 
@@ -45,6 +97,8 @@ plus six screenshot views in both languages. Assets come from the approved
   return 206 for native seeking, HEAD returns metadata, and invalid ranges return
   416. All other files bypass Worker execution. Security headers are explicitly
   preserved on Worker responses; no external storage or runtime dependency.
+  This is Cloudflare-only fallback code. Vercel serves MP4s as static assets;
+  verify its native byte-range behavior on a real deployment before cutover.
 - The product repository was still private on 2026-09-22. Keep the pre-release
   notice beside the video until the public release is confirmed. This change
   does not alter repository visibility or the separate GitHub-link PR.
