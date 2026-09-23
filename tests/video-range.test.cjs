@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const url = 'https://example.test/assets/demo-v3/en/frontdoor-demo.mp4';
+const url = 'https://example.test/assets/demo-v4/en/frontdoor-demo.mp4';
 
 async function serve(headers = {}, method = 'GET', pathname = url, omitLength = false) {
   const { default: worker } = await import('../src/video-worker.mjs');

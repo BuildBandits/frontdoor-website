@@ -11,7 +11,9 @@
       "/assets/demo-v2/en/frontdoor-demo.mp4",
       "/assets/demo-v2/it/frontdoor-demo.mp4",
       "/assets/demo-v3/en/frontdoor-demo.mp4",
-      "/assets/demo-v3/it/frontdoor-demo.mp4"
+      "/assets/demo-v3/it/frontdoor-demo.mp4",
+      "/assets/demo-v4/en/frontdoor-demo.mp4",
+      "/assets/demo-v4/it/frontdoor-demo.mp4"
     ],
     "directory": "./public",
     "not_found_handling": "single-page-application"

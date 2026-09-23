@@ -79,7 +79,7 @@ The landing includes native EN/IT video, seekable chapters, captions and transcr
 plus six screenshot views in both languages. Assets come from the approved
 `frontdoor-oss-demo-2026-08-14` package and show fictional demo data.
 
-- Current videos/captions live under `public/assets/demo-v3/{en,it}/`.
+- Current videos/captions live under `public/assets/demo-v4/{en,it}/`.
   The corrected integration diagrams are versioned alongside the new videos.
   Other screenshots, transcripts and original fallback media remain in `tour-v1`.
   Version changed media paths: `/assets/*` is cached immutably for one year.
@@ -131,3 +131,7 @@ reduced motion and no-JavaScript fallback.
 Run `npm test` for DOM interaction, resource/fallback, media limits and HTTP range checks.
 These tests simulate browser media events; they do not replace real playback or
 visual verification in a browser.
+
+### Light palette and playback release (23 September 2026)
+The approved light palette is now the default; the private preview switcher is not shipped.
+Video v4 keeps the existing voices, script and scene timing, but rebuilds the audio mix on a continuous PCM timeline before AAC encoding. This removes multi-second audio sample-duration jumps introduced by the previous mux. Both language buttons explicitly play the selected demo, including the initially selected English; no playback occurs without a user gesture. The native player uses a direct `src` and metadata preload. Old versioned assets remain immutable.

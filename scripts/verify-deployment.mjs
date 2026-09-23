@@ -67,13 +67,13 @@ async function verifyFiles(directory, prefix = '') {
 
 const count = await verifyFiles(publicDir);
 for (const lang of ['en', 'it']) {
-  const path = `/assets/demo-v3/${lang}/frontdoor-demo.mp4`;
+  const path = `/assets/demo-v4/${lang}/frontdoor-demo.mp4`;
   const local = await readFile(join(publicDir, path));
   const head = await request(path, { method: 'HEAD' });
   assert.equal(head.status, 200);
   assert.equal(Number(head.headers.get('content-length')), local.length);
   checkSecurity(head, path);
-  for (const [start, end] of [[0, 1023], [1000000, 1001023], [local.length - 1024, local.length - 1]]) {
+  for (const [start, end] of [[0, 1], [0, 1023], [1000000, 1001023], [local.length - 1024, local.length - 1]]) {
     const response = await request(path, { headers: { Range: `bytes=${start}-${end}` } });
     assert.equal(response.status, 206, `${lang}: byte-range support required`);
     assert.equal(response.headers.get('content-range'), `bytes ${start}-${end}/${local.length}`);
@@ -84,4 +84,4 @@ for (const lang of ['en', 'it']) {
   assert.equal(transcript.status, 200);
   assert.equal(hash(Buffer.from(await transcript.arrayBuffer())), hash(await readFile(join(publicDir, `assets/tour-v1/${lang}/transcript.html`))));
 }
-console.log(`Verified ${count} files, security/cache headers, 2 HEAD requests, 6 byte ranges and 2 versioned transcripts.`);
+console.log(`Verified ${count} files, security/cache headers, 2 HEAD requests, 8 byte ranges and 2 versioned transcripts.`);
