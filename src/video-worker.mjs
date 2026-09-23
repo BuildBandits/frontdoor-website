@@ -1,5 +1,5 @@
 // Current demos and immutable v1 fallback routes only. Everything else stays static.
-const VIDEO_PATH = /^\/assets\/(tour-v1|demo-v2|demo-v3)\/(en|it)\/frontdoor-demo\.mp4$/;
+const VIDEO_PATH = /^\/assets\/(tour-v1|demo-v2|demo-v3|demo-v4)\/(en|it)\/frontdoor-demo\.mp4$/;
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',

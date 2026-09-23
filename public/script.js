@@ -43,12 +43,12 @@ document.querySelectorAll('[data-year]').forEach((item) => {
 });
 
 // Native video remains usable without JavaScript. Only explicit user actions
-// start playback; language changes deliberately stop and reset the timeline.
+// start playback. Both languages use the same direct video.src/load path.
 const video = document.querySelector('#product-video');
 const languageButtons = [...document.querySelectorAll('[data-language]')];
 const chapterButtons = [...document.querySelectorAll('[data-chapter]')];
 const demoStatus = document.querySelector('[data-demo-status]');
-const mediaRoot = '/assets/demo-v3';
+const mediaRoot = '/assets/demo-v4';
 const imageRoot = '/assets/tour-v1';
 const demoLanguages = {
   en: { name: 'English', chapters: { catalog: 22.233, admin: 64.2, access: 89.667, connect: 136.967 } },
@@ -78,11 +78,18 @@ if (video) {
   languageButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const language = button.dataset.language;
-      if (!demoLanguages[language] || language === demoLanguage) return;
+      if (!demoLanguages[language]) return;
+      if (language === demoLanguage) {
+        // The initial EN selection used to be a no-op even when it was stuck.
+        // A deliberate click can reload failed/uninitialized media and play.
+        if (video.error || video.readyState === 0) video.load();
+        playVideo();
+        return;
+      }
       video.pause();
       pendingChapter = null;
       demoLanguage = language;
-      video.querySelector('source').src = `${mediaRoot}/${language}/frontdoor-demo.mp4`;
+      video.src = `${mediaRoot}/${language}/frontdoor-demo.mp4`;
       video.poster = `${imageRoot}/${language}/02-governed-catalog.webp`;
       video.setAttribute('aria-label', `Frontdoor product demo — ${demoLanguages[language].name}`);
       // Replace the track, rather than retaining stale cues from the other language.
@@ -107,7 +114,8 @@ if (video) {
       transcript.href = `${imageRoot}/${language}/transcript.html?v=2`;
       transcript.textContent = language === 'it' ? 'Leggi la trascrizione ↗' : 'Read the transcript ↗';
       transcript.lang = language;
-      demoStatus.textContent = `${demoLanguages[language].name} selected. Press Play to start from the beginning.`;
+      demoStatus.textContent = `${demoLanguages[language].name} selected.`;
+      playVideo();
     });
   });
 
@@ -135,9 +143,6 @@ if (video) {
   });
   video.addEventListener('error', () => {
     pendingChapter = null;
-    demoStatus.textContent = 'The video could not load. Use the EN or IT video link below the player.';
-  });
-  video.querySelector('source').addEventListener('error', () => {
     demoStatus.textContent = 'The video could not load. Use the EN or IT video link below the player.';
   });
 }
