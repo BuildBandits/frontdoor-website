@@ -79,10 +79,24 @@ The landing includes native EN/IT video, seekable chapters, captions and transcr
 plus six screenshot views in both languages. Assets come from the approved
 `frontdoor-oss-demo-2026-08-14` package and show fictional demo data.
 
-- Current videos/captions live under `public/assets/demo-v2/{en,it}/`.
-  Screenshots, transcripts and original fallback media remain in `tour-v1`.
+- Current videos/captions live under `public/assets/demo-v3/{en,it}/`.
+  The corrected integration diagrams are versioned alongside the new videos.
+  Other screenshots, transcripts and original fallback media remain in `tour-v1`.
   Version changed media paths: `/assets/*` is cached immutably for one year.
-- v2 cancels the original TTS 1.25 speed multiplier with a pitch-preserving
+- v3 rebuilds the walkthrough with fresh scene-by-scene narration: the original
+  OpenAI voices (IT Marin / EN Cedar), requested at speed 1.0, natural delivery
+  and explicit breathing room. Only unusually fast individual voice clips receive
+  a small pitch-preserving tempo correction; app footage is paced independently.
+  EN 220.250 seconds / IT 246.417 seconds. The original app captures are retained,
+  with their old caption area replaced by newly aligned subtitles. All 59 cues
+  per language are aligned to word timestamps and also shipped as WebVTT.
+  Brand cards use the real Frontdoor door mark. The integration diagram stays
+  clear of its title and the final card is held without fading back to the app.
+  The quiet background bed is newly synthesized, not third-party music.
+  Original media and v2 remain available for rollback; no old cached asset is
+  overwritten. The complete reproducible source/audio/timeline/master package
+  is archived as `frontdoor-feedback-2026-09-23` outside the website repository.
+- Legacy v2 cancelled the original TTS 1.25 speed multiplier with a pitch-preserving
   0.8 audio tempo and video timestamps multiplied by 1.25. It is a retiming of
   the approved masters, not newly synthesized speech; music and motion slow
   with the narration. Duration: EN 209.875 seconds, IT 213.750 seconds.
