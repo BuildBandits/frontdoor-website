@@ -52,14 +52,14 @@ test('all local resources, fragments and accessible control targets exist', () =
   }
   for (const lang of ['en', 'it']) {
     for (const name of ['frontdoor-demo.mp4', 'captions.vtt', 'transcript.html']) {
-      const file = path.join(publicDir, name === 'transcript.html' ? 'assets/tour-v1' : 'assets/demo-v2', lang, name);
+      const file = path.join(publicDir, name === 'transcript.html' ? 'assets/tour-v1' : 'assets/demo-v3', lang, name);
       assert.ok(fs.statSync(file).size < 25 * 1024 * 1024, file);
       if (name.endsWith('.mp4')) {
         const bodyBytes = 4 * Math.ceil(fs.statSync(file).size / 3) + 64;
         assert.ok(bodyBytes < 10 * 1024 * 1024, 'GitHub base64 request must fit ClawGuard');
       }
     }
-    const vtt = fs.readFileSync(path.join(publicDir, 'assets/demo-v2', lang, 'captions.vtt'), 'utf8');
+    const vtt = fs.readFileSync(path.join(publicDir, 'assets/demo-v3', lang, 'captions.vtt'), 'utf8');
     assert.ok(vtt.startsWith('WEBVTT\n\n'));
     assert.ok(vtt.match(/\d{2}:\d{2}:\d{2}\.\d{3} -->/g).length > 50);
     assert.ok(!/\d{2}:\d{2}:\d{2},\d{3}/.test(vtt));
@@ -94,7 +94,7 @@ test('chapter seeking handles unloaded media, rapid selection and source changes
   s.document.querySelector('[data-chapter="admin"]').click();
   s.document.querySelector('[data-chapter="connect"]').click();
   s.video.dispatchEvent(new s.window.Event('loadedmetadata'));
-  assert.equal(s.video.currentTime, 130.75);
+  assert.equal(s.video.currentTime, 136.967);
   s.video.dispatchEvent(new s.window.Event('timeupdate'));
   assert.equal(s.document.querySelector('[data-chapter][aria-current="true"]').dataset.chapter, 'connect');
   s.document.querySelector('[data-chapter="admin"]').click();
@@ -104,7 +104,7 @@ test('chapter seeking handles unloaded media, rapid selection and source changes
   assert.equal(s.video.currentTime, 0, 'do not apply an old-language pending seek');
   Object.defineProperty(s.video, 'readyState', { value: 1 });
   s.document.querySelector('[data-chapter="admin"]').click();
-  assert.equal(s.video.currentTime, 65.625);
+  assert.equal(s.video.currentTime, 72.633);
   s.close();
 });
 

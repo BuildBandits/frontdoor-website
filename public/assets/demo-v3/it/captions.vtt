@@ -1,0 +1,215 @@
+WEBVTT
+
+00:00:00.300 --> 00:00:05.220
+In azienda, ogni nuovo strumento promette
+velocità. Poi
+
+00:00:05.220 --> 00:00:09.200
+gli indirizzi si moltiplicano, i permessi
+divergono, i
+
+00:00:09.200 --> 00:00:12.940
+preferiti del browser invecchiano e l’IT torna a
+
+00:00:12.940 --> 00:00:15.960
+rispondere alla stessa domanda: dove trovo l’app
+giusta?
+
+00:00:17.940 --> 00:00:21.820
+Frontdoor crea una sola porta, semplice per le
+
+00:00:21.820 --> 00:00:24.360
+persone e governabile per chi gestisce l’IT.
+
+00:00:26.267 --> 00:00:29.840
+Questo è il catalogo di Meridian Works: sedici
+
+00:00:29.840 --> 00:00:35.000
+applicazioni aziendali, ordinate e descritte,
+con responsabili, etichette
+
+00:00:35.000 --> 00:00:37.920
+e modalità di accesso visibili a colpo d’occhio.
+
+00:00:39.520 --> 00:00:43.380
+Cerco security: Frontdoor porta subito in primo
+piano
+
+00:00:43.380 --> 00:00:47.100
+gli strumenti pertinenti, senza chiedere a
+nessuno di
+
+00:00:47.100 --> 00:00:48.700
+ricordare nomi o indirizzi.
+
+00:00:50.433 --> 00:00:53.620
+Le etichette trasformano il catalogo in una
+mappa
+
+00:00:53.620 --> 00:00:57.760
+leggibile. E con preferiti, ordine personale e
+vista
+
+00:00:57.760 --> 00:01:01.380
+compatta, ogni persona costruisce il proprio
+punto di
+
+00:01:01.380 --> 00:01:01.740
+partenza.
+
+00:01:03.380 --> 00:01:06.680
+Pochi secondi per passare dal catalogo completo
+alle
+
+00:01:06.680 --> 00:01:10.920
+app usate ogni giorno. La complessità resta
+dietro
+
+00:01:10.920 --> 00:01:11.500
+la porta.
+
+00:01:13.340 --> 00:01:17.060
+Dietro quella semplicità c’è il controllo
+operativo. Gli
+
+00:01:17.060 --> 00:01:21.940
+amministratori gestiscono applicazioni, stato,
+ordine e visibilità da
+
+00:01:21.940 --> 00:01:25.620
+un’unica console, senza rincorrere fogli o wiki.
+
+00:01:27.280 --> 00:01:34.320
+Ogni scheda raccoglie nome, descrizione, icona,
+destinazione, gruppi
+
+00:01:34.320 --> 00:01:39.400
+ed etichette. La configurazione è esplicita: ciò
+che
+
+00:01:39.400 --> 00:01:42.680
+l’utente vede corrisponde a una regola precisa.
+
+00:01:44.560 --> 00:01:49.080
+Utenti e gruppi determinano chi vede cosa.
+Tecnologia,
+
+00:01:49.460 --> 00:01:54.000
+operations, finance o leadership: Frontdoor
+compone un catalogo
+
+00:01:54.000 --> 00:01:58.520
+diverso per ogni perimetro, mantenendo una
+governance centrale.
+
+00:02:00.080 --> 00:02:03.020
+Qui i gruppi locali convivono con quelli
+provenienti
+
+00:02:03.020 --> 00:02:08.040
+dalla directory. Membership e applicazioni
+assegnate sono consultabili
+
+00:02:08.040 --> 00:02:09.120
+nello stesso posto.
+
+00:02:10.667 --> 00:02:15.880
+Ruoli distinti separano gestione, sola lettura e
+uso
+
+00:02:15.880 --> 00:02:22.000
+quotidiano. Così l’accesso amministrativo resta
+proporzionato alle responsabilità.
+
+00:02:24.380 --> 00:02:28.960
+Elena, responsabile IT, vede sedici
+applicazioni. Luca, utente
+
+00:02:28.960 --> 00:02:32.200
+standard, ne vede sette: solo quelle previste
+dai
+
+00:02:32.200 --> 00:02:35.480
+suoi gruppi. Stessa porta, esperienza
+pertinente.
+
+00:02:37.033 --> 00:02:41.700
+Frontdoor non impone un solo modello
+d’integrazione. Può
+
+00:02:41.700 --> 00:02:46.740
+aprire link diretti, inoltrare via SSO,
+raggiungere risorse
+
+00:02:46.740 --> 00:02:52.120
+interne, riutilizzare una sessione condivisa o
+delegare l’autenticazione
+
+00:02:52.120 --> 00:02:53.780
+a Microsoft Entra.
+
+00:02:55.200 --> 00:02:58.320
+Il risultato è concreto: un clic su Signal
+
+00:02:58.320 --> 00:03:02.340
+Ops apre la dashboard operativa giusta.
+Frontdoor è
+
+00:03:02.340 --> 00:03:05.240
+il punto d’accesso; l’app continua a fare il
+
+00:03:05.240 --> 00:03:05.660
+suo lavoro.
+
+00:03:07.240 --> 00:03:12.480
+Gli accessi generano tracce consultabili:
+utente, applicazione, momento
+
+00:03:12.480 --> 00:03:16.600
+e contesto. Per l’IT significa capire l’uso
+reale
+
+00:03:16.600 --> 00:03:18.300
+e indagare più rapidamente.
+
+00:03:19.880 --> 00:03:23.560
+Il registro audit racconta anche le modifiche
+amministrative.
+
+00:03:24.380 --> 00:03:27.080
+Non solo dove entrano le persone, ma come
+
+00:03:27.080 --> 00:03:29.040
+cambia la configurazione nel tempo.
+
+00:03:30.767 --> 00:03:34.660
+Logo, messaggi, lingua, tema e comportamento
+della home
+
+00:03:34.660 --> 00:03:39.600
+sono configurabili. Frontdoor si adatta
+all’organizzazione senza perdere
+
+00:03:39.600 --> 00:03:40.360
+coerenza.
+
+00:03:41.920 --> 00:03:45.480
+È open source e self-hosted. Parte con Docker,
+
+00:03:46.460 --> 00:03:49.560
+mantiene dati e configurazione nel tuo ambiente
+e
+
+00:03:49.560 --> 00:03:52.347
+lascia all’IT il controllo del punto d’ingresso.
+
+00:03:54.900 --> 00:03:58.580
+Meno tempo a cercare. Meno punti d’accesso
+dispersi.
+
+00:03:59.320 --> 00:04:01.300
+Una sola porta per le applicazioni che fanno
+
+00:04:01.300 --> 00:04:03.500
+funzionare l’azienda. Frontdoor.
+

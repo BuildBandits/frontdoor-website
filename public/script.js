@@ -48,11 +48,11 @@ const video = document.querySelector('#product-video');
 const languageButtons = [...document.querySelectorAll('[data-language]')];
 const chapterButtons = [...document.querySelectorAll('[data-chapter]')];
 const demoStatus = document.querySelector('[data-demo-status]');
-const mediaRoot = '/assets/demo-v2';
+const mediaRoot = '/assets/demo-v3';
 const imageRoot = '/assets/tour-v1';
 const demoLanguages = {
-  en: { name: 'English', chapters: { catalog: 21.75, admin: 63.375, access: 86.875, connect: 130.75 } },
-  it: { name: 'Italiano', chapters: { catalog: 22.75, admin: 65.625, access: 89.375, connect: 133.75 } },
+  en: { name: 'English', chapters: { catalog: 22.233, admin: 64.2, access: 89.667, connect: 136.967 } },
+  it: { name: 'Italiano', chapters: { catalog: 25.967, admin: 72.633, access: 103.8, connect: 156.733 } },
 };
 let demoLanguage = 'en';
 let pendingChapter = null;
@@ -164,7 +164,7 @@ if (screenButtons.length && tourPanels.length) {
     imageLanguage = language;
     tourPanels.forEach((panel) => {
       const img = panel.querySelector('[data-asset]');
-      const url = `${imageRoot}/${language}/${img.dataset.asset}.webp`;
+      const url = `${img.dataset.assetRoot || imageRoot}/${language}/${img.dataset.asset}.webp`;
       img.src = url;
       panel.querySelectorAll('[data-full-image]').forEach((link) => { link.href = url; });
     });
