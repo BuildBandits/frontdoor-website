@@ -212,6 +212,7 @@ button { color: inherit; font: inherit; }
 .demo-chapters button:hover, .demo-chapters button[aria-current="true"] { border-top-color: var(--lime); background: rgba(168,224,99,.065); }
 .demo-footnote { display: flex; justify-content: space-between; align-items: baseline; gap: 30px; margin-top: 22px; font-size: 12px; color: var(--muted); }
 .demo-footnote p { margin: 0; max-width: 580px; }
+.demo-status-error { position: static; width: auto; height: auto; margin: 14px 0 0; padding: 12px 14px; overflow: visible; clip: auto; white-space: normal; border: 1px solid #b96b50; border-radius: 8px; color: #803920; background: #fff4ec; font-size: 13px; }
 .demo-footnote p:last-child { flex-shrink: 0; }
 .demo-footnote a, .tour-stage figcaption a { text-decoration: underline; text-underline-offset: 4px; }
 .demo-footnote a:hover { color: var(--lime); }

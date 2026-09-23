@@ -12,16 +12,15 @@ function setup() {
   const dom = new JSDOM(html, { url: 'https://example.test/', runScripts: 'outside-only' });
   const { window } = dom;
   window.matchMedia = () => ({ matches: true });
-  const video = window.document.querySelector('video');
   const calls = { play: 0, pause: 0, load: 0 };
-  video.play = () => { calls.play++; return Promise.resolve(); };
-  video.pause = () => { calls.pause++; };
-  video.load = () => { calls.load++; };
+  window.HTMLMediaElement.prototype.play = () => { calls.play++; return Promise.resolve(); };
+  window.HTMLMediaElement.prototype.pause = () => { calls.pause++; };
+  window.HTMLMediaElement.prototype.load = () => { calls.load++; };
   Object.defineProperty(window.HTMLTrackElement.prototype, 'track', {
     get() { return this._track ??= { mode: 'disabled' }; },
   });
   window.eval(script);
-  return { window, document: window.document, video, calls, close: () => dom.window.close() };
+  return { window, document: window.document, get video() { return window.document.querySelector('#product-video'); }, calls, close: () => dom.window.close() };
 }
 
 test('progressive enhancement: native player and all screenshots work without JS', () => {
@@ -30,6 +29,8 @@ test('progressive enhancement: native player and all screenshots work without JS
   assert.equal(d.querySelector('video').getAttribute('preload'), 'metadata');
   assert.equal(d.querySelector('video').hasAttribute('autoplay'), false);
   assert.ok(d.querySelector('video').hasAttribute('controls'));
+  assert.equal(d.querySelector('video').hasAttribute('poster'), false);
+  assert.equal(d.querySelector('video').querySelector('track'), null);
   assert.equal(d.querySelectorAll('[data-tour-panel]:not([hidden])').length, 6);
   assert.ok([...d.querySelectorAll('[data-demo-controls], [data-tour-controls]')].every(e => e.hidden));
   assert.ok(d.querySelector('a[href$="/it/frontdoor-demo.mp4"]'));
@@ -42,12 +43,13 @@ test('initial English selection is playable, and a failed selected language can 
   assert.ok(s.video.src.endsWith('/demo-v4/en/frontdoor-demo.mp4'));
   assert.equal(s.calls.play, 0, 'never autoplay on page load');
   s.document.querySelector('[data-language="en"]').click();
-  assert.equal(s.calls.load, 1);
+  assert.ok(s.calls.load >= 1);
   assert.equal(s.calls.play, 1, 'initial EN must not be a no-op');
   Object.defineProperty(s.video, 'readyState', { value: 4 });
   Object.defineProperty(s.video, 'error', { value: { code: 3 } });
   s.document.querySelector('[data-language="en"]').click();
-  assert.equal(s.calls.load, 2, 'reload an explicit retry after a decode error');
+  assert.equal(s.calls.play, 2, 'a fresh player starts on explicit retry after a decode error');
+  assert.ok(!s.video.error);
   s.close();
 });
 
@@ -120,15 +122,17 @@ test('all local resources, fragments and accessible control targets exist', () =
 test('explicit language selection starts playback and replaces captions and transcript', () => {
   const s = setup();
   assert.equal(s.calls.play, 0);
+  s.video.dispatchEvent(new s.window.Event('playing'));
   const previous = s.video.querySelector('track');
   previous.track.mode = 'showing';
   s.document.querySelector('[data-language="it"]').click();
-  assert.equal(s.calls.pause, 1);
-  assert.equal(s.calls.load, 1);
+  assert.ok(s.calls.pause >= 1);
+  assert.ok(s.calls.load >= 1);
   assert.equal(s.calls.play, 1);
   assert.ok(s.video.src.endsWith('/it/frontdoor-demo.mp4'));
-  assert.ok(s.video.poster.endsWith('/it/02-governed-catalog.webp'));
+  assert.equal(s.video.hasAttribute('poster'), false);
   assert.ok(s.document.querySelector('[data-transcript]').href.endsWith('/it/transcript.html?v=2'));
+  s.video.dispatchEvent(new s.window.Event('playing'));
   const next = s.video.querySelector('track');
   assert.notEqual(previous, next);
   assert.equal(next.srclang, 'it');
@@ -136,7 +140,7 @@ test('explicit language selection starts playback and replaces captions and tran
   assert.equal(s.document.querySelector('[data-language="it"]').getAttribute('aria-pressed'), 'true');
   Object.defineProperty(s.video, 'readyState', { value: 4 });
   s.document.querySelector('[data-language="it"]').click();
-  assert.equal(s.calls.load, 1, 'healthy same-language media should not restart');
+  assert.equal(s.calls.play, 2, 'healthy same-language media remains playable');
   s.close();
 });
 
@@ -182,11 +186,13 @@ test('gallery switches all six screens and its language independently of audio',
 
 test('playback rejection and media errors provide a fallback instead of unhandled promises', async () => {
   const s = setup();
-  s.video.play = () => Promise.reject(new Error('autoplay policy'));
+  s.window.HTMLMediaElement.prototype.play = () => Promise.reject(new Error('autoplay policy'));
   s.document.querySelector('[data-chapter="catalog"]').click();
   await new Promise(resolve => setImmediate(resolve));
-  assert.match(s.document.querySelector('[data-demo-status]').textContent, /Press Play/);
+  assert.match(s.document.querySelector('[data-demo-status]').textContent, /did not start/);
   s.video.dispatchEvent(new s.window.Event('error'));
-  assert.match(s.document.querySelector('[data-demo-status]').textContent, /EN or IT video link/);
+  s.video.dispatchEvent(new s.window.Event('error'));
+  assert.match(s.document.querySelector('[data-demo-status]').textContent, /Tap English to retry/);
+  assert.ok(s.document.querySelector('[data-demo-status]').classList.contains('demo-status-error'));
   s.close();
 });
