@@ -75,3 +75,12 @@ test('non-video requests pass through to the asset binding unchanged', async () 
   } } });
   assert.equal(result, response);
 });
+
+test('the renamed diagnostic MP4 has the same range handling as the original', async () => {
+  const renamed = 'https://example.test/assets/demo-v4/en/frontdoor-demo-cachecheck-20260923.mp4';
+  const response = await serve({Range: 'bytes=0-1'}, 'GET', renamed);
+  assert.equal(response.status, 206);
+  assert.equal(response.headers.get('content-range'), 'bytes 0-1/10');
+  assert.equal(response.headers.get('cache-control'), 'public, max-age=31536000, immutable');
+  assert.deepEqual([...new Uint8Array(await response.arrayBuffer())], [0, 1]);
+});
