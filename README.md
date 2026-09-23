@@ -1,7 +1,9 @@
 # Frontdoor website
 
-Static product website for Frontdoor. Vercel migration is prepared; the existing
-Cloudflare Workers deployment remains available during the transition.
+Static product website for Frontdoor: **https://frontdoor.buildbandits.com/**.
+Hosted on Vercel Hobby with GitHub deployments. Cloudflare Workers remains available
+as a fallback. The custom domain, HTTPS certificate and HTTP-to-HTTPS redirect
+were verified on 2026-09-23.
 
 ## Local development
 
@@ -12,8 +14,8 @@ npm run dev
 
 ## Vercel deployment
 
-Import `BuildBandits/frontdoor-website` into the authorized Vercel Hobby account
-after the website repository is public. This is the free, non-commercial
+`BuildBandits/frontdoor-website` is public and connected to the authorized
+Vercel Hobby project `frontdoor-website`. This is the free, non-commercial
 open-source project; do not activate Pro or a paid trial for this migration.
 
 `vercel.json` supplies all build settings: **Other** framework, `npm ci --include=dev`,
@@ -23,16 +25,15 @@ environment secrets, or external media service are required. Only public website
 files are deployed; Cloudflare's `_headers` is excluded and its policies are
 expressed in `vercel.json`. Missing paths are not rewritten to the homepage.
 
-Connect Vercel's GitHub app only to this repository and select `main` as the
-production branch. Branch/PR deployments provide previews. Check the actual Git
-integration with a preview before considering automatic deployments operational.
+Vercel's GitHub app is authorized only for this repository; `main` is the
+production branch. PR previews and production deployments have been verified.
 
-Before moving the domain, run against the deployed revision:
+To verify a deployment, run from its exact source revision:
 
 ```bash
 npm ci
 npm run build
-npm run verify:deployment -- https://THE-ACTUAL-VERCEL-DEPLOYMENT
+npm run verify:deployment -- https://frontdoor.buildbandits.com
 ```
 
 The last command validates deployed content, security/cache headers, subtitle MIME
@@ -43,18 +44,17 @@ replace the visual/playback review described below.
 
 ### Domain and cutover
 
-The intended domain is `frontdoor.buildbandits.com`. Keep the authoritative DNS
-and registrar on Spaceship. Add this subdomain to the Vercel project, then use the
-**exact CNAME destination returned for that project**, with host `frontdoor`.
-Add a TXT record only if Vercel explicitly returns an ownership challenge. Do not
-change nameservers, apex records, mail records, or unrelated subdomains.
+The production domain is `frontdoor.buildbandits.com`. The authoritative DNS
+and registrar remain on Spaceship. Its only migration record is:
+`frontdoor CNAME 32efc9afb807d69d.vercel-dns-017.com.`
+This destination was assigned by Vercel specifically to this project.
+Do not change nameservers, apex records, mail records, or unrelated subdomains.
 
-Wait for DNS verification and the HTTPS certificate, repeat the deployment checks
-on the custom domain, and then update the canonical URL, Open Graph URL/image,
-GitHub homepage, and deployment documentation. Keep Cloudflare available until
-the custom domain and real EN/IT playback/chapter seeking are verified.
+DNS and HTTPS are verified. HTTP redirects permanently to HTTPS. The canonical
+and Open Graph URLs use the custom domain. Keep Cloudflare available as a fallback;
+removing it is a separate operation, not part of a content update.
 
-### Cloudflare fallback (still active until cutover)
+### Cloudflare fallback (still active)
 
 The Worker is connected to `main` through Cloudflare Workers Builds. Every push
 to `main` triggers a deployment at
