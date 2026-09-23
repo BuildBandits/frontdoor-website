@@ -44,7 +44,7 @@ document.querySelectorAll('[data-year]').forEach((item) => {
 
 // Native video remains usable without JavaScript. Only explicit user actions
 // start playback. Both languages use the same direct video.src/load path.
-const video = document.querySelector('#product-video');
+let video = document.querySelector('#product-video');
 const languageButtons = [...document.querySelectorAll('[data-language]')];
 const chapterButtons = [...document.querySelectorAll('[data-chapter]')];
 const demoStatus = document.querySelector('[data-demo-status]');
@@ -62,49 +62,108 @@ const clearActiveChapter = () => chapterButtons.forEach((button) => button.remov
 
 if (video) {
   document.querySelectorAll('[data-demo-controls]').forEach((element) => { element.hidden = false; });
+  let captionsEnabled = false;
+  let recoveredInitialError = false;
+  const showVideoError = (message) => {
+    demoStatus.textContent = message;
+    demoStatus.classList.add('demo-status-error');
+  };
+  const clearVideoError = () => demoStatus.classList.remove('demo-status-error');
+  const attachCaptions = () => {
+    if (video.querySelector('track')) return;
+    // Safari successfully starts the same MP4 in the minimal diagnostic player.
+    // Add captions only once media is playing, not during its initial load.
+    const track = document.createElement('track');
+    track.kind = 'captions';
+    track.src = `${mediaRoot}/${demoLanguage}/captions.vtt`;
+    track.srclang = demoLanguage;
+    track.label = demoLanguages[demoLanguage].name;
+    video.append(track);
+    if (captionsEnabled) track.track.mode = 'showing';
+  };
+  const bindVideo = () => {
+    const current = video;
+    current.addEventListener('loadedmetadata', () => {
+      if (current === video && pendingChapter !== null) seekToChapter(pendingChapter);
+    });
+    current.addEventListener('playing', () => {
+      if (current !== video) return;
+      clearVideoError();
+      attachCaptions();
+    });
+    current.addEventListener('timeupdate', () => {
+      if (current !== video) return;
+      const active = [...chapterButtons].reverse().find((button) =>
+        video.currentTime >= demoLanguages[demoLanguage].chapters[button.dataset.chapter]);
+      chapterButtons.forEach((button) => {
+        if (button === active) button.setAttribute('aria-current', 'true');
+        else button.removeAttribute('aria-current');
+      });
+    });
+    current.addEventListener('error', () => {
+      if (current !== video) return;
+      if (!recoveredInitialError) {
+        // A fresh element on a tap works on the affected iPhone. Also clear a
+        // failed initial preload so Safari's native Play can be tried again.
+        recoveredInitialError = true;
+        replacePlayer();
+        return;
+      }
+      pendingChapter = null;
+      showVideoError('The video could not load. Tap English to retry, or use the EN video link below.');
+    });
+  };
+  const replacePlayer = () => {
+    const previous = video;
+    const previousTrack = previous.querySelector('track');
+    if (previousTrack) captionsEnabled = previousTrack.track.mode === 'showing';
+    const next = previous.cloneNode(false);
+    next.removeAttribute('src');
+    next.preload = 'none';
+    next.setAttribute('aria-label', `Frontdoor product demo — ${demoLanguages[demoLanguage].name}`);
+    previous.replaceWith(next);
+    video = next;
+    bindVideo();
+    previous.pause();
+    previous.removeAttribute('src');
+    previous.load();
+    video.src = `${mediaRoot}/${demoLanguage}/frontdoor-demo.mp4`;
+    video.load();
+  };
   const playVideo = () => {
-    video.play().catch(() => {
-      demoStatus.textContent = 'Press Play in the video controls to start the demo.';
+    const current = video;
+    current.play().catch(() => {
+      if (current !== video) return;
+      showVideoError('The video did not start. Tap the selected language to retry, or use the video link below.');
     });
   };
   const seekToChapter = (seconds) => {
     video.currentTime = seconds;
     pendingChapter = null;
   };
-  video.addEventListener('loadedmetadata', () => {
-    if (pendingChapter !== null) seekToChapter(pendingChapter);
-  });
+  bindVideo();
+  if (video.error) {
+    recoveredInitialError = true;
+    replacePlayer();
+  }
 
   languageButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const language = button.dataset.language;
       if (!demoLanguages[language]) return;
       if (language === demoLanguage) {
-        // The initial EN selection used to be a no-op even when it was stuck.
-        // A deliberate click can reload failed/uninitialized media and play.
-        if (video.error || video.readyState === 0) video.load();
+        // Match the proven Safari diagnostic: recreate failed/uninitialized
+        // media synchronously inside the user's tap before calling play().
+        if (video.error || video.readyState === 0) replacePlayer();
+        clearVideoError();
         playVideo();
         return;
       }
-      video.pause();
+      recoveredInitialError = false;
       pendingChapter = null;
       demoLanguage = language;
-      video.src = `${mediaRoot}/${language}/frontdoor-demo.mp4`;
-      video.poster = `${imageRoot}/${language}/02-governed-catalog.webp`;
-      video.setAttribute('aria-label', `Frontdoor product demo — ${demoLanguages[language].name}`);
-      // Replace the track, rather than retaining stale cues from the other language.
-      const previousTrack = video.querySelector('track');
-      const captionsEnabled = previousTrack.track.mode === 'showing';
-      previousTrack.remove();
-      const track = document.createElement('track');
-      track.kind = 'captions';
-      track.src = `${mediaRoot}/${language}/captions.vtt`;
-      track.srclang = language;
-      track.label = demoLanguages[language].name;
-      track.default = captionsEnabled;
-      video.append(track);
-      if (captionsEnabled) track.track.mode = 'showing';
-      video.load();
+      replacePlayer();
+      clearVideoError();
       clearActiveChapter();
       languageButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
       chapterButtons.forEach((item) => {
@@ -126,25 +185,13 @@ if (video) {
         seekToChapter(seconds);
       } else {
         pendingChapter = seconds;
-        video.load();
+        if (video.error || video.readyState === 0) replacePlayer();
       }
       playVideo();
       demoStatus.textContent = `Opening chapter at ${timestamp(seconds)}.`;
     });
   });
 
-  video.addEventListener('timeupdate', () => {
-    const active = [...chapterButtons].reverse().find((button) =>
-      video.currentTime >= demoLanguages[demoLanguage].chapters[button.dataset.chapter]);
-    chapterButtons.forEach((button) => {
-      if (button === active) button.setAttribute('aria-current', 'true');
-      else button.removeAttribute('aria-current');
-    });
-  });
-  video.addEventListener('error', () => {
-    pendingChapter = null;
-    demoStatus.textContent = 'The video could not load. Use the EN or IT video link below the player.';
-  });
 }
 
 const screenButtons = [...document.querySelectorAll('[data-screen]')];
