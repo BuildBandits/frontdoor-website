@@ -135,3 +135,14 @@ visual verification in a browser.
 ### Light palette and playback release (23 September 2026)
 The approved light palette is now the default; the private preview switcher is not shipped.
 Video v4 keeps the existing voices, script and scene timing, but rebuilds the audio mix on a continuous PCM timeline before AAC encoding. This removes multi-second audio sample-duration jumps introduced by the previous mux. Both language buttons explicitly play the selected demo, including the initially selected English; no playback occurs without a user gesture. The native player uses a direct `src` and metadata preload. Old versioned assets remain immutable.
+
+### Temporary Safari diagnosis (23 September 2026)
+
+`/diagnostics/safari/index.html` hosts the minimal player previously checked on
+the private preview. `/diagnostics/safari/renamed.html` is the same test with a
+new MP4 filename. Both files have identical bytes and cache policy; the homepage,
+its player and the original MP4 are unchanged. Diagnostic pages are unlinked,
+`noindex, nofollow`, and `no-store`; these markers do not make them private.
+Reports stay in browser memory until the user copies them. No telemetry, cookies,
+or external services are added. Keep the same security policy as the homepage.
+The new MP4 is also registered in the Cloudflare fallback range handler.

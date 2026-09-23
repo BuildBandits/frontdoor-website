@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Frontdoor — prova Safari</title>
+  <link rel="stylesheet" href="/diagnostics/safari/check.css">
+  <script src="/diagnostics/safari/check.js" data-video="/assets/demo-v4/en/frontdoor-demo.mp4" data-variant="A · Nome attuale"></script>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">FRONTDOOR · PROVA SAFARI</p>
+    <h1>Confronto video su Safari.</h1>
+    <p>Stesso sito e stessi byte video: cambia soltanto il nome del file. Premi <strong>Avvia prova</strong>. Se resta bloccato, prova gli altri due pulsanti; poi copia l’esito qui in chat.</p>
+    <nav aria-label="Confronto">
+      <a href="/diagnostics/safari/index.html">A · Nome attuale</a> · <a href="/diagnostics/safari/renamed.html">B · Nome nuovo</a>
+    </nav>
+    <p><strong>A · Nome attuale</strong></p>
+    <div id="player-host">
+      <video id="test-video" controls playsinline preload="metadata" width="1280" height="720" src="/assets/demo-v4/en/frontdoor-demo.mp4"></video>
+    </div>
+    <p id="result" role="status" aria-live="polite">Pronto per la prova.</p>
+    <div class="actions">
+      <button id="normal" type="button">1. Avvia prova</button>
+      <button id="fresh" type="button">2. Avvio su tocco</button>
+      <button id="fullscreen" type="button">3. Schermo intero</button>
+    </div>
+    <p>La seconda prova crea un player nuovo al tocco; la terza lascia a Safari l’apertura a schermo intero. Tutte usano lo stesso indirizzo video.</p>
+    <p><a href="/assets/demo-v4/en/frontdoor-demo.mp4">Apri direttamente l’MP4 inglese</a></p>
+    <button id="copy" type="button">Copia esito</button>
+    <p id="copy-status" role="status"></p>
+    <details>
+      <summary>Dettagli della prova</summary>
+      <textarea id="report" readonly aria-label="Esito della diagnosi"></textarea>
+    </details>
+    <p class="note">L’esito resta in questa pagina: non viene inviato automaticamente. Pagina pubblica di diagnosi, non collegata dal menu e contrassegnata noindex. Homepage e player principale restano invariati.</p>
+  </main>
+</body>
+</html>

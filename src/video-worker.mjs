@@ -1,5 +1,6 @@
 // Current demos and immutable v1 fallback routes only. Everything else stays static.
 const VIDEO_PATH = /^\/assets\/(tour-v1|demo-v2|demo-v3|demo-v4)\/(en|it)\/frontdoor-demo\.mp4$/;
+const CACHE_CHECK_PATH = '/assets/demo-v4/en/frontdoor-demo-cachecheck-20260923.mp4';
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -20,7 +21,8 @@ function parseRange(value, size) {
 
 export default {
   async fetch(request, env) {
-    if (!VIDEO_PATH.test(new URL(request.url).pathname)) return env.ASSETS.fetch(request);
+    const pathname = new URL(request.url).pathname;
+    if (!VIDEO_PATH.test(pathname) && pathname !== CACHE_CHECK_PATH) return env.ASSETS.fetch(request);
     if (!['GET', 'HEAD'].includes(request.method)) {
       return new Response(null, { status: 405, headers: { ...SECURITY_HEADERS, Allow: 'GET, HEAD' } });
     }
